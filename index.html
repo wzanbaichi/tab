@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TAB</title>
+    <style type=text/css>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul>li{
+            list-style: none;
+        }
+        .box {
+            width: 500px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            margin-top: 30px;
+            padding: 50px;
+            border-radius: 6px;
+            box-shadow: 1px 1px 10px rgba(159, 159, 159, 0.8);
+        }
+        .head>li {
+            display: inline-block;
+            height: 40px;
+            width: 80px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            border: 1px solid #d1d1d1;
+        }
+        .head .active{
+            background-color: rgba(209, 209, 209, 0.6);
+            border: none;
+        }
+        .content {
+            min-height: 300px;
+        }
+        .content>li{
+            display: none;
+        }
+        .content .active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="head">
+            <li class="active">tab1</li>
+            <li>tab2</li>
+                <li>tab3</li>
+        </ul>
+        <ul class="content">
+            <li class="active">aaa</li>
+            <li>bbb</li>
+            <li>ccc</li>
+        </ul>
+    </div>
+
+
+
+    <script>
+        var head = $('.head'),
+            content = $('.content'),
+            headLi = $$('.head>li'),
+            contentLi = $$('.content>li');
+        head.addEventListener('click',function(e){
+            if(e.target.tagName.toLowerCase() === 'li') {
+                for (var i = 0; i < head.children.length; i++) {
+                    headLi[i].classList.remove('active');
+                }
+                e.target.classList.add('active');
+                for(var i = 0;i<contentLi.length;i++){
+                    contentLi[i].classList.remove('active');
+                }
+                var index = [].indexOf.call(headLi,e.target);
+                contentLi[index].classList.add('active');
+            }
+        })
+        function $(id){
+            return document.querySelector(id);
+        }
+        function $$(cls){
+            return document.querySelectorAll(cls);
+        }
+    </script>
+</body>
+</html>
